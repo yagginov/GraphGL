@@ -21,7 +21,6 @@
 
 extern unsigned int SCR_WIDTH;
 extern unsigned int SCR_HEIGHT;
-extern bool WANT_DRAW;
 
 class Game
 {
