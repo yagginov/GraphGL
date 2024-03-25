@@ -1,0 +1,59 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.38.33130.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///d:/university/3 course/2 semester/комп'ютерні системи/курсова робота/course_work/visual_app/source/createwindow.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "6c749764aff344011d3bf1517d3c0fd60d42681c2faf20370064e9552473aaed"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/university/3 course/2 semester/комп'ютерні системи/курсова робота/course_work/visual_app/source/createwindow.h"
+          },
+          "hashes": {
+            "sha-256": "4dcee6a1ec9a39da1a552b2edb30b88535f5251d070dc1020b0d8b74560f4f83"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/university/3 course/2 semester/комп'ютерні системи/курсова робота/course_work/dependencies/glew/include/gl/glew.h"
+          },
+          "hashes": {
+            "sha-256": "1a2d50dc00a69940838cb3b5413cf7a7ac3cee8078672f27ffbfa2d3b88ad344"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/university/3 course/2 semester/комп'ютерні системи/курсова робота/course_work/dependencies/glfw/include/glfw/glfw3.h"
+          },
+          "hashes": {
+            "sha-256": "c0e1bee7f3ae5bb5e5b52e9ace4a53d23cce9e8548386b0acca58f1db8fb057b"
+          }
+        }
+      ]
+    }
+  ]
+}
