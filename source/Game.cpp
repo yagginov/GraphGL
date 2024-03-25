@@ -2,7 +2,6 @@
 
 unsigned int SCR_WIDTH = 1500;
 unsigned int SCR_HEIGHT = 800;
-bool WANT_DRAW = true;
 
 
 /*
@@ -92,13 +91,12 @@ void Game::play()
         // Обработка ввода
         processInput(window);
 
-        if (WANT_DRAW) {
-            //// Render here ----------------------------------------------------
-            glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            draw((float)SCR_WIDTH / (float)SCR_HEIGHT);
-            WANT_DRAW = false;
-        }
+        //// Render here ----------------------------------------------------
+        glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        draw((float)SCR_WIDTH / (float)SCR_HEIGHT);
+
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
@@ -387,7 +385,6 @@ void Game::save_selected_to_image()
     glDeleteFramebuffers(1, &fbo);
 
     glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
-    WANT_DRAW = true;
 }
 
 
@@ -441,7 +438,6 @@ void Game::processInput(GLFWwindow* window)
         hit_access = false;
         draw_line_access = false;
         key_1_pressed = true;
-        WANT_DRAW = true;
     }
     if (glfwGetKey(window, GLFW_KEY_1) == GLFW_RELEASE && key_1_pressed)
     {
@@ -459,7 +455,6 @@ void Game::processInput(GLFWwindow* window)
         hit_access = false;
         draw_circle_access = false;
         key_2_pressed = true;
-        WANT_DRAW = true;
     }
     if (glfwGetKey(window, GLFW_KEY_2) == GLFW_RELEASE && key_2_pressed)
     {
@@ -477,7 +472,6 @@ void Game::processInput(GLFWwindow* window)
         draw_line_access = false;
         draw_circle_access = false;
         key_3_pressed = true;
-        WANT_DRAW = true;
     }
     if (glfwGetKey(window, GLFW_KEY_3) == GLFW_RELEASE && key_3_pressed)
     {
@@ -493,7 +487,6 @@ void Game::processInput(GLFWwindow* window)
         this->add_circle(glm::vec3((float)mouseX, (float)mouseY, 0.0f),
             glm::vec3((float)SCR_WIDTH, (float)(SCR_HEIGHT), 0.0f));
         mouse_pressed = true;
-        WANT_DRAW = true;
     }
 
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS && !mouse_pressed && draw_line_access)
@@ -515,7 +508,6 @@ void Game::processInput(GLFWwindow* window)
                 selection_set.clear();
             }
             posA = pos;
-            WANT_DRAW = true;
         }
 
         
@@ -532,7 +524,6 @@ void Game::processInput(GLFWwindow* window)
             glm::vec3((float)SCR_WIDTH, (float)(SCR_HEIGHT), 0.0f));
 
         mouse_pressed = true;
-        WANT_DRAW = true;
     }
 
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE && mouse_pressed)
@@ -547,8 +538,6 @@ void Game::processInput(GLFWwindow* window)
             _tr_square.set_posB(glm::vec2(0.0f));
             _tr_square.set_select(true);
         }
-        
-        WANT_DRAW = true;
     }
 
     if (captured != -1)
@@ -558,8 +547,6 @@ void Game::processInput(GLFWwindow* window)
 
         this->move(captured, glm::vec3((float)mouseX, (float)mouseY, 0.0f),
             glm::vec3((float)SCR_WIDTH, (float)(SCR_HEIGHT), 0.0f));
-        WANT_DRAW = true;
-
     }
     
     if (captured == -1 && mouse_pressed && hit_access)
@@ -569,7 +556,6 @@ void Game::processInput(GLFWwindow* window)
 
         _tr_square.set_posB(_camera.get_mouse_positions(glm::vec3((float)mouseX, (float)mouseY, 0.0f),
             glm::vec3((float)SCR_WIDTH, (float)(SCR_HEIGHT), 0.0f)));
-        WANT_DRAW = true;
     }
 
     if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
@@ -596,7 +582,6 @@ void Game::framebuffer_size_callback(GLFWwindow* window, int width, int height)
     SCR_WIDTH = width;
     SCR_HEIGHT = height;
     glViewport(0, 0, width, height);
-    WANT_DRAW = true;
 }
 
 /*
@@ -609,7 +594,6 @@ void Game::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
     Game* graph = static_cast<Game*>(glfwGetWindowUserPointer(window));
 
     graph->scroll_processing(window, xoffset, yoffset);
-    WANT_DRAW = true;
 }
 
 
