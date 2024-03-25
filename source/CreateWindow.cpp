@@ -21,9 +21,6 @@ GLFWwindow* createWindow(unsigned int width, unsigned int height)
     //// Make the window's context current-------
     glfwMakeContextCurrent(window);
 
-    //// Сообщаем GLFW, чтобы он захватил наш курсор 
-    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
     //// Init glue---------------------------
     if (glewInit() != GLEW_OK)
     {

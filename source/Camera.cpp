@@ -5,48 +5,37 @@ Camera::Camera(float left, float right, float bottom, float top, float aspect, g
 	_view(1.0f)
 {
 	_projection = glm::ortho(_left * _aspect, _right * _aspect, _bottom, _top, 0.1f, 10.0f);
-	//std::cout << "l = " << _left << " r = " << _right << " b = " << _bottom << " t = " << top << "\n";
-	//std::cout << "aspect = " << _aspect << "\n\n";
 	_view = glm::translate(_view, view);
 }
 
 void Camera::change_projection_matrix()
 {
 	_projection = glm::ortho(_left * _aspect, _right * _aspect, _bottom, _top, 0.1f, 10.0f);
-	//std::cout << "l = " << _left << " r = " << _right << " b = " << _bottom << " t = " << _top << "\n";
-	//std::cout << "aspect = " << _aspect << "\n\n";
 }
 
 glm::vec3 Camera::get_mouse_positions(glm::vec3 mouse_position, glm::vec3 window_size)
 {
-	// Перетворюємо позицію миші з відносних координат вікна в діапазон від 0 до 1
 	float normalized_x = mouse_position.x / window_size.x;
 	float normalized_y = mouse_position.y / window_size.y;
 
-	// Обчислюємо глобальні координати миші відповідно до параметрів камери
 	float global_x = normalized_x * (_right - _left) * _aspect + _left * _aspect;
 	float global_y = _top - normalized_y * (_top - _bottom);
 
-	// Повертаємо глобальні координати миші та відстань до площини камери (0, 0, 0)
 	return glm::vec3(global_x, global_y, 0.0f);
 }
 
 void Camera::procces_mouse_scroll(glm::vec3 mouse_position, glm::vec3 window_size, float yoffset)
 {
-	// Визначаємо коефіцієнт масштабування
 	float scale_factor = 0.1f * (_right - _left);
 
-	// Конвертуємо координати миші у відносні координати вікна (від 0 до 1)
 	float normalized_x = mouse_position.x / window_size.x;
 	float normalized_y = mouse_position.y / window_size.y;
 
-	// Обчислюємо нові значення для _left, _right, _bottom, _top з використанням yoffset
 	_left += yoffset * scale_factor * normalized_x;
 	_right -= yoffset * scale_factor * (1.0f - normalized_x);
 	_bottom += yoffset * scale_factor * (1.0f - normalized_y);
 	_top -= yoffset * scale_factor * normalized_y;
 
-	// Викликаємо функцію, що змінює матрицю проекції
 	change_projection_matrix();
 }
 
