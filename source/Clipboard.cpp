@@ -43,16 +43,13 @@ cbd::Clipboard::Clipboard()
 
 bool cbd::Clipboard::set_image(const char* imagePath)
 {
-    // Відкриття буфера обміну
     if (!OpenClipboard(nullptr)) {
         ErrorExit(LPTSTR("OpenClipboard"));
         return false;
     }
 
-    // Очистка буфера обміну
     EmptyClipboard();
 
-    // Завантаження зображення з файлу
     HBITMAP hBitmap = (HBITMAP)LoadImage(nullptr, imagePath, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
     if (hBitmap == nullptr) {
         ErrorExit(LPTSTR("LoadImage"));
@@ -61,10 +58,8 @@ bool cbd::Clipboard::set_image(const char* imagePath)
         return false;
     }
 
-    // Додавання зображення до буфера обміну
     SetClipboardData(CF_BITMAP, hBitmap);
 
-    // Закриття буфера обміну
     CloseClipboard();
 
     return true;

@@ -307,7 +307,6 @@ void Game::save_selected_to_image()
 
     glViewport(0, 0, width, height);
 
-    // создание текстурного объекта
     unsigned int texColorBuffer;
     glGenTextures(1, &texColorBuffer);
     glBindTexture(GL_TEXTURE_2D, texColorBuffer);
@@ -317,7 +316,6 @@ void Game::save_selected_to_image()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    // присоедиение текстуры к объекту текущего кадрового буфера
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texColorBuffer, 0);
 
     Camera copy_cam(a.x, a.y, a.w, a.z, 1.0f, glm::vec3(0.0f, 0.0f, -3.0f));
@@ -379,11 +377,9 @@ void Game::save_selected_to_image()
     stbi_flip_vertically_on_write(true);
     std::string filename_png = "testfiles/output_" + std::to_string(width) + "-" + std::to_string(height) + ".png";
 
-    // Використовуйте stbi_write_png для збереження зображення
     stbi_write_png(filename_png.c_str(), width, height, 4, buffer, width * 4);
     std::cout << "recording the image to the file is finished\n";
 
-    // Очистка пам'яті, що була виділена для буфера
     delete[] buffer;
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -612,7 +608,6 @@ void Game::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     Game* graph = static_cast<Game*>(glfwGetWindowUserPointer(window));
 
-    // Виклик методу об'єкту graph для обробки скролу
     graph->scroll_processing(window, xoffset, yoffset);
     WANT_DRAW = true;
 }
