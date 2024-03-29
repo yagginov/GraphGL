@@ -250,6 +250,97 @@ void Game::update_selection_set()
 }
 
 
+void Game::create_copy_info()
+{
+    copy_point = glm::vec3(INFINITY, -INFINITY, 0.0f);
+    copy_info = "";
+
+    int index = _circles.size();
+    std::map<int, int> indexes;
+
+    std::set<int> test_s;
+    std::set<int> selection_line_set;
+
+    for (const auto& it : selection_set)
+    {
+        glm::vec3 pos = _circles[it].get_pos();
+
+        copy_point.x = std::min(copy_point.x, pos.x);
+        copy_point.y = std::max(copy_point.y, pos.y);
+
+        copy_info += std::to_string(pos.x) + " ";
+        copy_info += std::to_string(pos.y) + " ";
+
+        indexes[std::stoi(_circles[it].get_name()) - 1] = index++;
+
+        for (const auto& jt : _circles[it].edgesA)
+        {
+            if (test_s.count(jt))
+            {
+                selection_line_set.insert(jt);
+            }
+            else
+            {
+                test_s.insert(jt);
+            }
+        }
+
+        for (const auto& jt : _circles[it].edgesB)
+        {
+            if (test_s.count(jt))
+            {
+                selection_line_set.insert(jt);
+            }
+            else
+            {
+                test_s.insert(jt);
+            }
+        }
+    }
+
+    copy_point += glm::vec3(-1.0f, 1.0f, 0.0f);
+    copy_info += "\n";
+
+    for (const auto& it : selection_line_set)
+    {
+        copy_info += std::to_string(indexes[_edges[it].get_rel().x]) + " " + 
+            std::to_string(indexes[_edges[it].get_rel().y]) + " ";
+    }
+
+    copy_info += "\n";
+}
+
+void Game::paste_graph()
+{
+    glm::vec3 dir = last_mouse_pos - copy_point;
+
+    glm::vec3 num(0.0f);
+    glm::ivec2 i_num(0);
+    std::string line;
+    std::stringstream copy_stream(copy_info);
+
+    if (getline(copy_stream, line))
+    {
+        std::stringstream test_ss(line);
+        while (test_ss >> num.x, test_ss >> num.y)
+        {
+            _circles.add_circle(num + dir);
+            graph.add_node(_circles.size());
+        }
+    }
+
+    if (getline(copy_stream, line))
+    {
+        std::stringstream test_ss(line);
+        while (test_ss >> i_num.x, test_ss >> i_num.y)
+        {
+            add_edge(i_num.x, i_num.y);
+        }
+    }
+
+}
+
+
 /*
     The method saves the drawn graph in a special formatted file, 
     from which we can then immediately restore the graph.
@@ -283,6 +374,8 @@ void Game::save_selected_to_image()
 {
     glm::vec4 a(INFINITY, -INFINITY, -INFINITY, INFINITY);
 
+    std::cout << selection_set.size() << "\n";
+
     for (const auto& it : selection_set)
     {
         glm::vec3 pos = _circles[it].get_pos();
@@ -295,8 +388,8 @@ void Game::save_selected_to_image()
     a += glm::vec4(-1.0f, 1.0f, 1.0f, -1.0f);
 
     int width, height;
-    width = (a.y - a.x) * 200;
-    height = (a.z - a.w) * 200;
+    width = (a.y - a.x) * 100;
+    height = (a.z - a.w) * 100;
 
 
     unsigned int fbo;
@@ -370,6 +463,8 @@ void Game::save_selected_to_image()
     }
 
     char* buffer = new char[width * height * 4];
+
+    std::cout << sizeof(buffer) << "\n";
     glReadPixels(0, 0, width, height, GL_BGRA_EXT, GL_UNSIGNED_BYTE, buffer);
 
     stbi_flip_vertically_on_write(true);
@@ -414,6 +509,8 @@ void Game::processInput(GLFWwindow* window)
     static bool key_2_pressed = false;
     static bool key_3_pressed = false;
     static bool key_S_pressed = false;
+    static bool key_C_pressed = false;
+    static bool key_V_pressed = false;
     static bool hit_access = false;
     static bool first_click = true;
     static bool select = false;
@@ -538,6 +635,12 @@ void Game::processInput(GLFWwindow* window)
             _tr_square.set_posB(glm::vec2(0.0f));
             _tr_square.set_select(true);
         }
+
+        double mouseX, mouseY;
+        glfwGetCursorPos(window, &mouseX, &mouseY);
+
+        last_mouse_pos = _camera.get_mouse_positions(glm::vec3(mouseX, mouseY, 0.0f), 
+            glm::vec3((float)SCR_WIDTH, (float)SCR_HEIGHT, 0.0f));
     }
 
     if (captured != -1)
@@ -568,6 +671,26 @@ void Game::processInput(GLFWwindow* window)
         {
             save_selected_to_image();
             key_S_pressed = false;
+        }
+
+        if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS && !key_C_pressed)
+        {
+            key_C_pressed = true;
+        }
+        if (glfwGetKey(window, GLFW_KEY_C) == GLFW_RELEASE && key_C_pressed)
+        {
+            create_copy_info();
+            key_C_pressed = false;
+        }
+
+        if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS && !key_V_pressed)
+        {
+            key_V_pressed = true;
+        }
+        if (glfwGetKey(window, GLFW_KEY_V) == GLFW_RELEASE && key_V_pressed)
+        {
+            paste_graph();
+            key_V_pressed = false;
         }
     }
 }
