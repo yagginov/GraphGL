@@ -37,6 +37,10 @@ private:
 	graph::Graph graph;
 
 	glm::vec3 first_point;
+	glm::vec3 last_mouse_pos;
+
+	glm::vec3 copy_point;
+	std::string copy_info;
 
 public:
 	Game();
@@ -51,6 +55,9 @@ public:
 
 	int check_mouse_colision(glm::vec3 pos, glm::vec3 w_size);
 	void update_selection_set();
+
+	void create_copy_info();
+	void paste_graph();
 
 	void save_file(std::string filename);
 	void save_selected_to_image();

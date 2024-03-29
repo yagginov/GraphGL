@@ -2,8 +2,8 @@
 
 int main(void)
 {
-    Game game("testfiles/lab_3.txt");
+    Game game("testfiles/copy_test.txt");
     game.play();
-    game.save_file("testfiles/lab_3_t.txt");
+    game.save_file("testfiles/copy_test.txt");
     return 0;
 }
