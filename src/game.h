@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GAME_H
+#define GAME_H
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -71,3 +73,5 @@ public:
 
 static void clearError();
 static void getError(std::string line);
+
+#endif 			// GAME_H

@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef GRAPH_H
 #define GRAPH_H
 
@@ -14,7 +12,7 @@
 #include <utility>
 
 #include "constants.h"
-#include "Link.h"
+#include "link.h"
 
 namespace graph
 {
@@ -63,4 +61,6 @@ namespace graph
 		void compile_parameters();
 	};
 }
-#endif
+
+
+#endif 		// GRAPH_H

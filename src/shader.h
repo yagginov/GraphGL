@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SHADER_H
+#define SHADER_H
 
 #include <GL/glew.h>
 
@@ -30,3 +31,5 @@ public:
 	void setVec4(const std::string& name, glm::vec4 value) const;
 
 };
+
+#endif		// SHADER_H

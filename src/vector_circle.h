@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VECTOR_CIRCLE_H
+#define VECTOR_CIRCLE_H
 
 #include <iostream>
 #include <vector>
@@ -9,9 +10,9 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/vector_angle.hpp>
 
-#include "Circle.h"
-#include "Shader.h"
-#include "Text.h"
+#include "circle.h"
+#include "shader.h"
+#include "text.h"
 
 class VectorCircle
 {
@@ -43,3 +44,5 @@ public:
 
 	std::vector<Circle>::iterator end();
 };
+
+#endif		// VECTOR_CIRCLE_H

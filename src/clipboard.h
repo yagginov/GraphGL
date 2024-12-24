@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CLIPBOARD_H
+#define CLIPBOARD_H
+
 #include <Windows.h>
 #include <errhandlingapi.h>
 #include <strsafe.h>
@@ -18,4 +20,4 @@ namespace cbd {
 	};
 }
 
-
+#endif 		// CLIPBOARD_H

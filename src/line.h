@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LINE_H
+#define LINE_H
 
 #include <GL/glew.h>
 
@@ -11,7 +12,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/vector_angle.hpp>
 
-#include "Shader.h"
+#include "shader.h"
 
 class Line
 {
@@ -38,3 +39,5 @@ public:
 	void draw(Shader &shader);
 
 };
+
+#endif		// LINE_H

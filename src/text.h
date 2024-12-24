@@ -1,4 +1,6 @@
-#pragma once
+#ifndef TEXT_H
+#define TEXT_H
+
 #include <GL/glew.h>
 
 #include <iostream>
@@ -34,3 +36,5 @@ public:
     void before_draw(glm::mat4 projection, glm::mat4 view);
     void after_draw();
 };
+
+#endif      // TEXT_H

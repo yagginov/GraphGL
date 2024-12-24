@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CAMERA_H
+#define CAMERA_H
 
 #include <GL/glew.h>
 
@@ -28,3 +29,5 @@ public:
 	glm::mat4 get_view_matrix();
 	void set_aspect(float aspect);
 };
+
+#endif 		// CAMERA_H

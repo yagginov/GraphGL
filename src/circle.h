@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CIRCLE_H
+#define CIRCLE_H
+
 #include <GL/glew.h>
 
 #include <vector>
@@ -8,7 +10,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "Shader.h"
+#include "shader.h"
 
 class Circle
 {
@@ -40,3 +42,5 @@ public:
 
 	void draw(Shader& shader);
 };
+
+#endif 		// CIRCLE_H

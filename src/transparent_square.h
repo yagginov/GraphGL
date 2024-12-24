@@ -1,3 +1,6 @@
+#ifndef TRANSPARENT_SQUARE_H
+#define TRANSPARENT_SQUARE_H
+
 #include <GL/glew.h>
 
 #include "shader.h"
@@ -31,3 +34,5 @@ public:
 
 	void draw(glm::mat4 projection, glm::mat4 view);
 };
+
+#endif		// TRANSPARENT_SQUARE_H

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VECTOR_LINE_H
+#define VECTOR_LINE_H
 
 #include <iostream>
 #include <vector>
@@ -10,8 +11,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/vector_angle.hpp>
 
-#include "Line.h"
-#include "Shader.h"
+#include "line.h"
+#include "shader.h"
 
 class VectorLine
 {
@@ -43,3 +44,5 @@ public:
 
 	std::vector<Line>::iterator end();
 };
+
+#endif		// VECTOR_LINE_H

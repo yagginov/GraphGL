@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef LINK_H
 #define LINK_H
 
@@ -16,4 +14,4 @@ struct Link
 bool operator< (const Link& a, const Link& b);
 bool operator== (const Link& a, const Link& b);
 
-#endif
+#endif         // LINK_H
