@@ -1,18 +1,99 @@
 # GraphGL
-The project allows you to draw graphs. It uses the [GraphLib](https://github.com/yagginov/GraphLib) graph representation library.
 
-For correct operation, you must first configure project dependencies:
-  - [GLEW](https://glew.sourceforge.net/)
-  - [GLFW](https://www.glfw.org/)
-  - [FreeType](https://freetype.org/)
-  - [glm](https://github.com/g-truc/glm)
-  - [GraphLib](https://github.com/yagginov/GraphLib)
+## Overview
 
-Also, stb_image_write is used to save the graph you have drawn as a photo, but it is not necessary to configure it additionally, since the required file is already included in the project. [stb](https://github.com/nothings/stb/blob/master/stb_image_write.h)
+GraphGL is a graphical utility for creating and managing graph representations. This README provides all necessary information to set up, configure, and use the project effectively.
 
-Management:
-  - To be able to draw vertices, you need to press ***1*** on the keyboard, and then you can draw graph vertices with a mouse click. Numbering of vertices is automatic and it is impossible to change the name of the vertex (at least for now).
-  - To specify edges between graph vertices, first press ***2*** on the keyboard. Then you need to select two vertices with mouse clicks and draw an edge between them (the edge is automatically considered bidirectional and has a base length of 1.0).
-  - If you press ***3*** on the keyboard, you will get the opportunity to move both individual vertices of the graph, and several at once by selecting them.
-  - To save the image of the graph, select all the vertices you want to save and press the combination CTRL + S. The image will be saved in the testfiles folder in .png format with transparency.
-  - It is also possible to save the graph in a special formatted file, so that later when the program is loaded, it can be opened and not drawn from scratch.
+---
+
+## Prerequisites
+
+Before building the project, ensure the following tools are installed:
+
+- **Microsoft Visual C++ (MSVC)** compiler
+- **CMake** (latest version recommended)
+
+You may also need to adjust certain paths in the `CMakeLists.txt` file depending on your system configuration (see the "Path Adjustments" section below).
+
+---
+
+## Dependencies
+
+The project relies on the following libraries:
+
+### Required Dependencies
+
+- **[GLEW](https://glew.sourceforge.net/)** (I used precompiled binaries)
+- **[GLFW](https://www.glfw.org/)** (I used precompiled binaries)
+
+### Included as Submodules
+
+The repository includes these dependencies as submodules:
+
+- **[FreeType](https://freetype.org/)**: Precompiled binaries from [this repository](https://github.com/ubawurinna/freetype-windows-binaries) were used. Note: These are for Windows, so alternative binaries may be needed for other platforms.
+- **[glm](https://github.com/g-truc/glm)**
+- **[stb](https://github.com/nothings/stb)**
+
+To initialize the submodules, run the following commands after cloning the repository:
+
+```bash
+git submodule init
+git submodule update
+```
+
+---
+
+## Building the Project
+
+1. Install the required dependencies (MSVC and CMake).
+2. Configure and generate project files with CMake:
+
+```bash
+cmake -G "Visual Studio 17 2022" -A Win32 -S . -B build
+```
+
+3. Build the project:
+
+```bash
+cmake --build build
+```
+
+4. Run the executable from the `build` directory.
+
+---
+
+## Path Adjustments
+
+Depending on your system setup, you may need to modify paths in the `CMakeLists.txt` file to correctly locate the required libraries. These paths include:
+
+### Paths to Libraries
+
+```cmake
+# Paths to library directories
+link_directories("${CMAKE_SOURCE_DIR}/dependencies/freetype/release static/vs2015-2022/win32")
+link_directories("${CMAKE_SOURCE_DIR}/dependencies/glew-2.1.0/lib/Release/Win32")
+link_directories("${CMAKE_SOURCE_DIR}/dependencies/glfw-3.4/lib-vc2022")
+
+# Include directories
+include_directories("${CMAKE_SOURCE_DIR}/dependencies/freetype/include")
+include_directories("${CMAKE_SOURCE_DIR}/dependencies/glew-2.1.0/include")
+include_directories("${CMAKE_SOURCE_DIR}/dependencies/glfw-3.4/include")
+```
+
+Adjust these paths as needed to match your specific directory structure and library versions.
+
+---
+
+## Usage
+
+### Graph Management
+
+- **Draw Vertices**: Press ***1*** to enable vertex drawing. Click on the canvas to place graph vertices. Numbering is automatic and cannot be modified at this stage.
+- **Draw Edges**: Press ***2*** to enable edge drawing. Click on two vertices to create an edge between them. Edges are bidirectional and have a default length of 1.0.
+- **Move Vertices**: Press ***3*** to enable vertex movement. Drag individual vertices or select and move multiple vertices at once.
+
+### Saving Graphs
+
+- **Save as Image**: Select the vertices to save and press `CTRL + S`. The image will be saved as a `.png` file with transparency in the `testfiles` folder (just create it first;).
+- **Save as File**: Save the graph in a formatted file for future loading and editing.
+
