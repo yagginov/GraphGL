@@ -502,8 +502,8 @@ void Game::scroll_processing(GLFWwindow* window, double xoffset, double yoffset)
 */
 void Game::processInput(GLFWwindow* window)
 {
-    static bool mouse_pressed = false;
     static bool draw_circle_access = true;
+    static bool mouse_pressed = false;
     static bool draw_line_access = false;
     static bool key_1_pressed = false;
     static bool key_2_pressed = false;
