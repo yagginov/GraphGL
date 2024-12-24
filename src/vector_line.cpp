@@ -1,7 +1,7 @@
-#include "line.h"
+#include "vector_line.h"
 
 VectorLine::VectorLine() :
-	_shader("Shaders/VertexShader_line.vs", "Shaders/FragmentShader_line.fs")
+	_shader("shaders/vs_line.shader", "shaders/fs_line.shader")
 {
     float vertices[] = {
         -0.5f, -0.5f,

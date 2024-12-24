@@ -12,7 +12,7 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H 
 
-#include "Shader.h"
+#include "shader.h"
 
 struct Character {
     unsigned int TextureID;

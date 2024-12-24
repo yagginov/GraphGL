@@ -104,7 +104,7 @@ void Game::play()
     glfwTerminate();
 
     graph.compile_adj();
-    graph.compile_table();
+    graph.compile_adjency_matrix();
 
     graph.search_all_lengths();
 

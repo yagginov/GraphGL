@@ -3,7 +3,7 @@
 #include <GLFW/glfw3.h>
 
 #include "stb_image_write.h"
-#include "Clipboard.h"
+#include "clipboard.h"
 
 #include <vector>
 #include <string>
@@ -11,13 +11,13 @@
 #include <fstream>
 #include "algorithm"
 
-#include "Camera.h"
-#include "VectorLine.h"
-#include "VectorCircle.h"
-#include "CreateWindow.h"
-#include "TransparentSquareRenderer.h"
+#include "camera.h"
+#include "vector_line.h"
+#include "vector_circle.h"
+#include "create_window.h"
+#include "transparent_square.h"
 
-#include <Graph.h>
+#include "graph_lib/graph.h"
 
 extern unsigned int SCR_WIDTH;
 extern unsigned int SCR_HEIGHT;

@@ -2,7 +2,7 @@
 
 
 Text::Text(const std::string& filename): 
-_shader("Shaders/VertexShader_text.vs", "Shaders/FragmentShader_text.fs")
+_shader("shaders/vs_text.shader", "shaders/fs_text.shader")
 {
     float vertices[] = {
          0.0f,  0.0f, 0.0f, 1.0f,

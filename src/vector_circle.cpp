@@ -1,8 +1,8 @@
-#include "circle.h"
+#include "vector_circle.h"
 
 VectorCircle::VectorCircle() :
-	_shader("Shaders/VertexShader.vs", "Shaders/FragmentShader.fs"),
-    _text_arial("Fonts/arial.ttf")
+	_shader("shaders/vs_base.shader", "shaders/fs_base.shader"),
+    _text_arial("fonts/trueno-font/Trueno-75PE.otf")
 {
     float vertices[] = {
         -1.0f, -1.0f,

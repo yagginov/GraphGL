@@ -1,7 +1,7 @@
 #include "transparent_square.h"
 
 TransparentSquareRenderer::TransparentSquareRenderer() :
-    _shader("Shaders/VertexShader_square.vs", "Shaders/FragmentShader_square.fs"),
+    _shader("shaders/vs_square.shader", "shaders/fs_square.shader"),
     _posA(0.0f, 0.0f), _posB(0.0f, 0.0f),
     _color(0.867f, 0.867f, 1.0f, 0.5f), access(false), select(false)
 {

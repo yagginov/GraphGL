@@ -5,6 +5,15 @@ testfiles/
 dependencies/glew-2.1.0/
 dependencies/glfw-3.4/
 
+# vscode folder
+.vscode/
+
+# Build folder
+build/
+
+# Fonts folder
+fonts/
+
 # Prerequisites
 *.d
 

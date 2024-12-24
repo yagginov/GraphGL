@@ -28,6 +28,7 @@ unsigned int Shader::compileShader(const std::string& path, unsigned int type) c
     catch (std::ifstream::failure e)
     {
         std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+        std::cout << path << std::endl;
     }
     const char* shaderCode = code.c_str();
 
@@ -48,6 +49,7 @@ unsigned int Shader::compileShader(const std::string& path, unsigned int type) c
         char* infoLog = (char*)_alloca(length * sizeof(char));
         glGetShaderInfoLog(shader, length, &length, infoLog);
         std::cout << "ERROR::SHADER::COMPILATION_FAILED\n" << infoLog << std::endl;
+        std::cout << path << std::endl;
         glDeleteShader(shader);
         return 0;
     }
